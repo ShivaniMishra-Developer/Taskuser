@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
+import Header from './Components/Header';
+import Login from './Components/Login';
+import Dashboard from './Components/Dashboard';
+import ForgotPassword from './Components/ForgotPassword';
+import Signup from './Components/Signup';
 
 function App() {
   return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+const AppContent = () => {
+  const location = useLocation();
+  const showHeader = !['/Login', '/forgot-password', '/Signup'].includes(location.pathname);
+
+  return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {showHeader && <Header />}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/signup" element={<Signup />} />
+        {/* Add more routes here as needed */}
+      </Routes>
     </div>
   );
 }
