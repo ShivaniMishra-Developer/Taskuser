@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { CSSTransition } from "react-transition-group";
 import "../Components/Styles/Header.css";
 
@@ -27,9 +27,7 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    // Clear user session (e.g., remove token from local storage)
     localStorage.removeItem('userToken');
-    // Navigate to login page
     navigate('/Login');
   };
 
